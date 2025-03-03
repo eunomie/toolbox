@@ -1,0 +1,14 @@
+{
+  "name": "java-workspace",
+  "engineVersion": "v0.17.0-llm.4",
+  "sdk": {
+    "source": "go"
+  },
+  "dependencies": [
+    {
+      "name": "java",
+      "source": "github.com/eunomie/java",
+      "pin": "a39262897eaa7fedb8ff921af5cbc8b18cceab30"
+    }
+  ]
+}
