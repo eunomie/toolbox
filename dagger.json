@@ -10,8 +10,16 @@
       "source": "glow"
     },
     {
-      "name": "java-workspace",
-      "source": "java-workspace"
+      "name": "simple-workspace",
+      "source": "simple-workspace"
+    },
+    {
+      "name": "maven-builder",
+      "source": "maven-builder"
+    },
+    {
+      "name": "go-builder",
+      "source": "go-builder"
     }
   ],
   "source": ".dagger"

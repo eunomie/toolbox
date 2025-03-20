@@ -1,4 +1,4 @@
-module dagger/java-workspace
+module dagger/simple-workspace
 
 go 1.23.6
 

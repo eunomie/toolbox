@@ -1,0 +1,7 @@
+{
+  "name": "simple-workspace",
+  "engineVersion": "v0.17.0-010101000000-dev-61cb859d37fe",
+  "sdk": {
+    "source": "go"
+  }
+}

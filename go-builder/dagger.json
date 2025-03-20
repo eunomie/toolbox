@@ -1,0 +1,14 @@
+{
+  "name": "go-builder",
+  "engineVersion": "v0.17.0-010101000000-dev-61cb859d37fe",
+  "sdk": {
+    "source": "go"
+  },
+  "dependencies": [
+    {
+      "name": "go",
+      "source": "github.com/dagger/dagger/modules/go",
+      "pin": "05ec7d865ca261b2aee920144937757514e74607"
+    }
+  ]
+}
