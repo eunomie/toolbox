@@ -35,7 +35,7 @@ func (m *Toolbox) Do(ctx context.Context, ask string) (*dagger.Directory, error)
 	if err != nil {
 		return nil, err
 	}
-	return llm.JavaWorkspace().Dir(), nil
+	return llm.GetJavaWorkspace("javaWorkspace").Dir(), nil
 }
 
 // Add comments to the existing java code to improve readability and maintainability
@@ -44,7 +44,7 @@ func (m *Toolbox) AddComments(ctx context.Context) (*dagger.Directory, error) {
 	if err != nil {
 		return nil, err
 	}
-	return llm.JavaWorkspace().Dir(), nil
+	return llm.GetJavaWorkspace("javaWorkspace").Dir(), nil
 }
 
 // Refactor the existing java code to improve readability and maintainability
@@ -53,7 +53,7 @@ func (m *Toolbox) Refactor(ctx context.Context) (*dagger.Directory, error) {
 	if err != nil {
 		return nil, err
 	}
-	return llm.JavaWorkspace().Dir(), nil
+	return llm.GetJavaWorkspace("javaWorkspace").Dir(), nil
 }
 
 // Bump dependencies with their latest versions
@@ -62,10 +62,10 @@ func (m *Toolbox) BumpDeps(ctx context.Context) (*dagger.Directory, error) {
 	if err != nil {
 		return nil, err
 	}
-	return llm.JavaWorkspace().Dir(), nil
+	return llm.GetJavaWorkspace("javaWorkspace").Dir(), nil
 }
 
-func (m *Toolbox) printLLMLastReply(ctx context.Context, llm *dagger.Llm) (string, error) {
+func (m *Toolbox) printLLMLastReply(ctx context.Context, llm *dagger.LLM) (string, error) {
 	out, err := llm.LastReply(ctx)
 	if err != nil {
 		return "", err
@@ -73,7 +73,7 @@ func (m *Toolbox) printLLMLastReply(ctx context.Context, llm *dagger.Llm) (strin
 	return dag.Glow().DisplayMarkdown(ctx, out)
 }
 
-func (m *Toolbox) asEditor(ctx context.Context, assignment string) (*dagger.Llm, error) {
+func (m *Toolbox) asEditor(ctx context.Context, assignment string) (*dagger.LLM, error) {
 	return m.askTo(ctx, `
 You are an expert Java programmer receiving an assignment.
 
@@ -98,7 +98,7 @@ $assignment
 `, assignment)
 }
 
-func (m *Toolbox) asReader(ctx context.Context, assignment string) (*dagger.Llm, error) {
+func (m *Toolbox) asReader(ctx context.Context, assignment string) (*dagger.LLM, error) {
 	return m.askTo(ctx, `
 You are an expert Java programmer receiving an assignment.
 
@@ -117,14 +117,16 @@ $assignment
 `, assignment)
 }
 
-func (m *Toolbox) askTo(ctx context.Context, prompt, assignment string) (*dagger.Llm, error) {
-	return dag.Llm().WithJavaWorkspace(
+func (m *Toolbox) askTo(ctx context.Context, prompt, assignment string) (*dagger.LLM, error) {
+	return dag.Llm().SetJavaWorkspace("javaWorkspace",
 		dag.JavaWorkspace(m.Src)).
 		WithPromptVar("assignment", assignment).
 		WithPrompt(prompt).Sync(ctx)
 }
 
-func New(src *dagger.Directory) *Toolbox {
+func New(
+	// +defaultPath="."
+	src *dagger.Directory) *Toolbox {
 	return &Toolbox{
 		Src: src,
 	}

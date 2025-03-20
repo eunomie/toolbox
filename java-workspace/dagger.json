@@ -1,6 +1,6 @@
 {
   "name": "java-workspace",
-  "engineVersion": "v0.17.0-llm.4",
+  "engineVersion": "v0.17.0-010101000000-dev-61cb859d37fe",
   "sdk": {
     "source": "go"
   },
@@ -8,7 +8,7 @@
     {
       "name": "java",
       "source": "github.com/eunomie/java",
-      "pin": "a39262897eaa7fedb8ff921af5cbc8b18cceab30"
+      "pin": "3df434da477ba88dd67fc98e149645ca061fe5c2"
     }
   ]
 }
